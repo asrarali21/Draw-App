@@ -1,19 +1,15 @@
-import { PrismaClient } from './generated'
+import { PrismaClient } from "./generated";
 
 declare global {
-  var __prisma: PrismaClient | undefined
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
 }
 
-let prisma: PrismaClient
+export const prisma =
+  globalThis.prisma ?? new PrismaClient();
 
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient()
-} else {
-  if (!global.__prisma) {
-    global.__prisma = new PrismaClient()
-  }
-  prisma = global.__prisma
+// Avoid creating a new client on every hot-reload in dev. In prod we let it be GC'd per process.
+const isProd = (globalThis as any)?.process?.env?.NODE_ENV === "production";
+if (!isProd) {
+  globalThis.prisma = prisma as PrismaClient;
 }
-
-export { prisma }
-export * from './generated'
