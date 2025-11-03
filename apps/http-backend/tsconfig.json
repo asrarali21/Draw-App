@@ -3,6 +3,10 @@
     "compilerOptions": {
         "rootDir": "./src",
         "outDir": "./dist"
+    },
+      "paths": {
+      "@db/*": ["../../packages/database/src/*"],
+      "@db": ["../../packages/database/src"]
     }
 }
 

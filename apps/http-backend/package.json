@@ -6,11 +6,14 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc -p .",
-         "dev": "tsc-watch --onSuccess \"node dist/index.js\" "
+    "dev": "tsc-watch --onSuccess \"node dist/index.js\" "
   },
   "dependencies": {
+    "@draw-app/database": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.5",
+    "cors": "^2.8.5",
     "express": "^5.1.0"
   },
   "keywords": [],
